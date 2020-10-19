@@ -28,6 +28,9 @@ zuul:
      cart: 
        path: /cart/**
        serviceId: CART-SERVICE
+     config:
+       path: /config/**
+       serviceId: CONFIG-SERVER
      maths:  
        path: /maths/**
        serviceId: MATHS-SERVICE
