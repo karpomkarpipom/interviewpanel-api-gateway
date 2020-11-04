@@ -35,25 +35,25 @@ public class LoginController {
     @Autowired
     private ILoginService iLoginService;
     
-    @CrossOrigin("*")
-    @PostMapping("/signup")
-    @ResponseBody
-    public ResponseEntity<Map<String, String>> signup(@RequestBody User user) {
-    	Map<String, String> responseSuccessMap=new HashMap<String,String>();
-    	//revisit this code feature------
-    	Set<Role> roleSet=new HashSet<Role>();
-    	roleSet.add(new Role(1,"USER"));
-    	user.setRole(roleSet);
-    	//------------
-    	
-    	User dbuserObj=iLoginService.saveUser(user);
-    	if(dbuserObj!=null) {
-    		responseSuccessMap.put("status","User "+dbuserObj.getFirstName() +" signedup Successfully!" );
-    	}else {
-    	      throw new CustomException("Signup unsuccessful!",HttpStatus.INTERNAL_SERVER_ERROR);
-    	}
-        return new ResponseEntity<Map<String, String>>(responseSuccessMap, HttpStatus.CREATED);
-    }
+  //  @CrossOrigin("*")
+    
+    //-----------> This method migrated to user service-------------------//
+	/*
+	 * @PostMapping("/signup")
+	 * 
+	 * @ResponseBody public ResponseEntity<Map<String, String>> signup(@RequestBody
+	 * User user) { Map<String, String> responseSuccessMap=new
+	 * HashMap<String,String>(); //revisit this code feature------ Set<Role>
+	 * roleSet=new HashSet<Role>(); roleSet.add(new Role(1,"USER"));
+	 * user.setRole(roleSet); //------------
+	 * 
+	 * User dbuserObj=iLoginService.saveUser(user); if(dbuserObj!=null) {
+	 * responseSuccessMap.put("status","User "+dbuserObj.getFirstName()
+	 * +" signedup Successfully!" ); }else { throw new
+	 * CustomException("Signup unsuccessful!",HttpStatus.INTERNAL_SERVER_ERROR); }
+	 * return new ResponseEntity<Map<String, String>>(responseSuccessMap,
+	 * HttpStatus.CREATED); }
+	 */
     
     @CrossOrigin("*")
     @PostMapping("/authenticate")
