@@ -3,6 +3,8 @@ package com.gateway.security;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +47,9 @@ public class JwtTokenProvider {
 
         Claims claims = Jwts.claims().setSubject(username);
         claims.put(AUTH,roles);
-
+        boolean isAdmin=roles.stream().anyMatch(roleStr -> "role_admin".equalsIgnoreCase(roleStr));
+         
+        claims.put("isAdmin", isAdmin);//
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 

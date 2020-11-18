@@ -59,7 +59,7 @@ public class LoginController {
     @PostMapping("/authenticate")
     @ResponseBody
     public ResponseEntity<AuthResponse> createAuthenticationToken(@RequestBody LoginRequest loginRequest) {
-        String token = iLoginService.login(loginRequest.getEmail(),loginRequest.getPassword());
+        String token = iLoginService.login(loginRequest.getEmail() != null?loginRequest.getEmail().toLowerCase():"",loginRequest.getPassword());
         HttpHeaders headers = new HttpHeaders();
         List<String> headerlist = new ArrayList<>();
         List<String> exposeList = new ArrayList<>();
